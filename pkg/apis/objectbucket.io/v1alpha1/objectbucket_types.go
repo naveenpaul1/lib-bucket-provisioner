@@ -103,8 +103,9 @@ type Connection struct {
 type ObjectBucketSpec struct {
 	StorageClassName string                                `json:"storageClassName"`
 	ReclaimPolicy    *corev1.PersistentVolumeReclaimPolicy `json:"reclaimPolicy"`
-	ClaimRef         *corev1.ObjectReference               `json:"claimRef"`
-	*Connection      `json:",inline"`
+	// +kubebuilder:pruning:PreserveUnknownFields
+	ClaimRef    *corev1.ObjectReference `json:"claimRef"`
+	*Connection `json:",inline"`
 }
 
 // ObjectBucketStatusPhase is set by the controller to save the state of the provisioning process.
