@@ -28,8 +28,8 @@ func ObjectBucketClaimGVK() schema.GroupVersionKind {
 }
 
 // ObjectBucketClaimSpec defines the desired state of ObjectBucketClaim
-// +kubebuilder:validation:XValidation:rule="!has(oldSelf.bucketName) || self.bucketName == oldSelf.bucketName",message="bucketName is immutable once set"
-// +kubebuilder:validation:XValidation:rule="!has(oldSelf.generateBucketName) || self.generateBucketName == oldSelf.generateBucketName",message="generateBucketName is immutable once set"
+// +kubebuilder:validation:XValidation:rule=`!has(oldSelf.bucketName) || oldSelf.bucketName == "" || self.bucketName == oldSelf.bucketName`,message="bucketName is immutable once set"
+// +kubebuilder:validation:XValidation:rule=`!has(oldSelf.generateBucketName) || oldSelf.generateBucketName == "" || self.generateBucketName == oldSelf.generateBucketName`,message="generateBucketName is immutable once set"
 type ObjectBucketClaimSpec struct {
 
 	// StorageClass names the StorageClass object representing the desired provisioner and parameters
